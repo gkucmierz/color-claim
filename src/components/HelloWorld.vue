@@ -2,11 +2,11 @@
 import { ref } from 'vue'
 
 import InputText from 'primevue/inputtext';
+import ColorPicker from 'primevue/colorpicker';
 
+let color = ref('');
 let colorName = ref('');
-let btcAddr = ref('')
-
-
+let btcAddr = ref('');
 
 </script>
 
@@ -18,12 +18,16 @@ let btcAddr = ref('')
   </div>
 
   <div>
-    <InputText type="text" v-model="colorName" />
-    <InputText type="text" v-model="btcAddr" />
+    <ColorPicker v-model="color" inline />
+    <InputText type="text" v-model="colorName" placeholder="Color Name" />
+    <InputText type="text" v-model="btcAddr" placeholder="BTC Address" />
   </div>
 
-{{ colorName }}
-{{ btcAddr }}
+  <pre>
+    #{{ color }}
+    {{ colorName }}
+    {{ btcAddr }}
+  </pre>
 
 </template>
 
