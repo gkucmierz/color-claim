@@ -18,10 +18,15 @@ let btcAddr = ref('');
     </div>
 
     <div class="flex justify-content-center flex-column flex-wrap">
-      <ColorPicker v-model="color" inline />
-      <InputText type="text" v-model="colorName" placeholder="Color Name" />
-      <InputText type="text" v-model="btcAddr" placeholder="BTC Address" />
-      <Button label="Claim" />
+      <form @submit="onSubmit" class="flex flex-column gap-2">
+        <ColorPicker v-model="color" inline />
+        <InputText type="text" v-model="colorName" placeholder="Color Name" />
+        <div class="p-inputgroup flex-1">
+          <InputText type="text" v-model="btcAddr" placeholder="BTC Address" />
+          <Button icon="pi pi-qrcode" severity="secondary" />
+        </div>
+        <Button label="Claim" />
+      </form>
     </div>
   </div>
 
