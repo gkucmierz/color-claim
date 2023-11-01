@@ -4,10 +4,20 @@ import { ref } from 'vue'
 import InputText from 'primevue/inputtext';
 import ColorPicker from 'primevue/colorpicker';
 import Button from 'primevue/button';
+import Dialog from 'primevue/dialog';
 
-let color = ref('');
-let colorName = ref('');
-let btcAddr = ref('');
+import { QrcodeStream } from 'vue-qrcode-reader';
+
+
+const color = ref('');
+const colorName = ref('');
+const btcAddr = ref('');
+const qrDialog = ref('');
+
+const onDetect = (scans) => {
+  btcAddr.value = (scans[0].rawValue || '').replace(/bitcoin\:/, '');
+  qrDialog.value = false;
+};
 
 </script>
 
@@ -23,18 +33,16 @@ let btcAddr = ref('');
         <InputText type="text" v-model="colorName" placeholder="Color Name" />
         <div class="p-inputgroup flex-1">
           <InputText type="text" v-model="btcAddr" placeholder="BTC Address" />
-          <Button icon="pi pi-qrcode" severity="secondary" />
+          <Button icon="pi pi-qrcode" severity="secondary" @click="qrDialog = true" />
         </div>
         <Button label="Claim" />
       </form>
     </div>
   </div>
 
-  <pre>
-    #{{ color }}
-    {{ colorName }}
-    {{ btcAddr }}
-  </pre>
+  <Dialog v-model:visible="qrDialog" modal header="Scan Bitcoin Address">
+    <qrcode-stream @detect="onDetect"></qrcode-stream>
+  </Dialog>
 
 </template>
 
