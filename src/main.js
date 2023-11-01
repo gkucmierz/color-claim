@@ -8,7 +8,7 @@ import App from './App.vue'
 
 const app = createApp(App);
 
-app.use(PrimeVue);
+app.use(PrimeVue, { ripple: true });
 app.component('Button', Button);
 
 app.mount('#app');
