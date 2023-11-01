@@ -12,12 +12,12 @@ let btcAddr = ref('');
 </script>
 
 <template>
-  <div class="main">
-    <div>
-      Choose, name and claim your own color.
+  <div class="flex">
+    <div class="">
+      <div>Choose, name and claim your own color.</div>
     </div>
 
-    <div class="card flex justify-content-center">
+    <div class="flex justify-content-center flex-column flex-wrap">
       <ColorPicker v-model="color" inline />
       <InputText type="text" v-model="colorName" placeholder="Color Name" />
       <InputText type="text" v-model="btcAddr" placeholder="BTC Address" />
@@ -34,14 +34,5 @@ let btcAddr = ref('');
 </template>
 
 <style scoped>
-/*
-.main {
-  display: flex;
-}
-
-.right-panel {
-  display: flex;
-  flex-direction: column;
-}*/
 
 </style>
