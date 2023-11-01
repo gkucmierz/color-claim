@@ -1,1 +1,2 @@
-@import 'primevue/resources/themes/lara-light-teal/theme.css'
+@import 'primevue/resources/themes/lara-light-teal/theme.css';
+@import '/node_modules/primeflex/primeflex.css';
