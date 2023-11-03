@@ -1,5 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
+
+import ColorCard from '../components/ColorCard.vue';
 
 import InputText from 'primevue/inputtext';
 import ColorPicker from 'primevue/colorpicker';
@@ -38,6 +40,11 @@ const onDetect = (scans) => {
         <Button label="Claim" />
       </form>
     </div>
+  </div>
+
+  <div>
+    <p>Preview</p>
+    <ColorCard :color="color" :name="colorName"></ColorCard>
   </div>
 
   <Dialog v-model:visible="qrDialog" modal header="Scan Bitcoin Address">
