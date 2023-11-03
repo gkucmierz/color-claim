@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "font-color-contrast": "^11.1.0",
     "js-base64": "^3.7.5",
     "modern-normalize": "^2.0.0",
     "primeflex": "^3.3.1",

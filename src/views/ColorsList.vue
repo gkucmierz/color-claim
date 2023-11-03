@@ -6,6 +6,8 @@ import ColorCard from '../components/ColorCard.vue';
 const colorsList = ref([
   { name: 'Barbie Pink', color: 'e0218a' },
   { name: 'Sky Blue', color: '0088ff' },
+  { name: 'Light Green', color: 'ddffdd' },
+  { name: 'Dark Green', color: '005500' },
 ]);
 
 </script>
