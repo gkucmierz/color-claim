@@ -12,7 +12,7 @@ import { QrcodeStream } from 'vue-qrcode-reader';
 const color = ref('');
 const colorName = ref('');
 const btcAddr = ref('');
-const qrDialog = ref('');
+const qrDialog = ref(false);
 
 const onDetect = (scans) => {
   btcAddr.value = (scans[0].rawValue || '').replace(/bitcoin\:/, '');

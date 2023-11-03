@@ -1,4 +1,5 @@
-import { createApp } from 'vue'
+import { createApp } from 'vue';
+import router from './router';
 
 import PrimeVue from 'primevue/config';
 import Button from "primevue/button";
@@ -8,6 +9,7 @@ import App from './App.vue'
 
 const app = createApp(App);
 
+app.use(router);
 app.use(PrimeVue, { ripple: true });
 app.component('Button', Button);
 
