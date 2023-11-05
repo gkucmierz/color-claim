@@ -3,6 +3,8 @@ import { ref, watch } from 'vue';
 import { encode } from 'js-base64';
 import fontColorContrast from 'font-color-contrast';
 
+const px = n => `${n}px`;
+
 const naturalSearch = (cond, retFirstTrue = true) => {
   let min = 1;
   let max = 1;
@@ -43,7 +45,11 @@ const buildURI = (color, name, size) => {
 };
 
 const MARGIN = 5;
-const props = defineProps(['color', 'name']);
+const props = defineProps({
+  color: { type: String },
+  name: { type: String },
+  size: { type: Number, default: 200 },
+});
 const svgURI = ref(buildURI(props.color, props.name));
 const textSize = ref(50);
 
@@ -79,7 +85,7 @@ showSvg(props.color, props.name);
 
 <style scoped>
 img {
-  width: 200px;
-  height: 200px;
+  width: v-bind(px(props.size));
+  height: v-bind(px(props.size));
 }
 </style>

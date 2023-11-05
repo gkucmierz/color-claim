@@ -18,7 +18,7 @@ const colorsList = ref([
   Colors List
   <ul>
     <li v-for="item in colorsList">
-      <ColorCard :color="item.color" :name="item.name"></ColorCard>
+      <ColorCard :color="item.color" :name="item.name" :size="100"></ColorCard>
     </li>
   </ul>
 </template>
