@@ -35,7 +35,7 @@ const onDetect = (scans) => {
         <InputText type="text" v-model="colorName" placeholder="Color Name" />
         <div class="p-inputgroup flex-1">
           <InputText type="text" v-model="btcAddr" placeholder="BTC Address" />
-          <Button icon="pi pi-qrcode" severity="secondary" @click="qrDialog = true" />
+          <!-- <Button icon="pi pi-qrcode" severity="secondary" @click="qrDialog = true" /> -->
         </div>
         <Button label="Claim" />
       </form>
