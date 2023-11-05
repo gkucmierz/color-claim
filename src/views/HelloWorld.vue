@@ -6,7 +6,8 @@ import ColorCard from '../components/ColorCard.vue';
 import InputText from 'primevue/inputtext';
 import ColorPicker from 'primevue/colorpicker';
 import Button from 'primevue/button';
-import Dialog from 'primevue/dialog';
+// import Dialog from 'primevue/dialog';
+
 
 import { QrcodeStream } from 'vue-qrcode-reader';
 
@@ -35,7 +36,7 @@ const onDetect = (scans) => {
         <ColorCard :color="color" :name="colorName"></ColorCard>
         <InputText type="text" v-model="colorName" placeholder="Color Name" />
         <div class="p-inputgroup flex-1">
-          <InputText type="text" v-model="btcAddr" placeholder="BTC Address" />
+          <InputText type="text" v-model="btcAddr" placeholder="BTC Address" v-tooltip.top="'Please use only Ordinals compatible wallets like UniSats, Xverse or Leather. Otherwise you might have a problem do access you inscription.'" label="Button" />
           <!-- <Button icon="pi pi-qrcode" severity="secondary" @click="qrDialog = true" /> -->
         </div>
         <Button label="Claim" />
