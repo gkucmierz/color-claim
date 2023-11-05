@@ -25,8 +25,8 @@ const getRGB = () => convert.hex.rgb(color.value).join(' ');
     <div class="flex justify-content-center flex-column flex-wrap">
       <form @submit="onSubmit" class="flex flex-column gap-2">
         <ColorCard :color="color" :name="colorName"></ColorCard>
-        <InputText type="text" :value="getRGB()" v-tooltip="'RGB'" />
-        <InputText type="text" :value="getHEX()" v-tooltip="'HEX'" />
+        <InputText type="text" :value="getRGB()" v-tooltip="'RGB'" readonly/>
+        <InputText type="text" :value="getHEX()" v-tooltip="'HEX'" readonly/>
         <InputText type="text" v-model="colorName" placeholder="Color Name" />
         <InputText type="text" v-model="btcAddr" placeholder="BTC Address" v-tooltip="'Please use only Ordinals compatible wallets like UniSats, Xverse or Leather. Otherwise you might have a problem do access you inscription.'" label="Button" />
         <Button label="Claim" />
