@@ -28,7 +28,7 @@ const getRGB = () => convert.hex.rgb(color.value).join(' ');
         <InputText type="text" :value="getRGB()" v-tooltip="'RGB'" readonly/>
         <InputText type="text" :value="getHEX()" v-tooltip="'HEX'" readonly/>
         <InputText type="text" v-model="colorName" placeholder="Color Name" v-tooltip="'Color Name'" />
-        <InputText type="text" v-model="btcAddr" placeholder="BTC Address" v-tooltip="'Please use only Ordinals compatible wallets like UniSats, Xverse or Leather. Otherwise you might have a problem do access you inscription.'" label="Button" />
+        <InputText type="text" v-model="btcAddr" placeholder="BTC Address" v-tooltip="'Please use only Ordinals compatible wallets like UniSats, Xverse or Leather. Otherwise you might have a problem to access you inscription.'" label="Button" />
         <Button label="Claim" />
       </form>
     </div>
