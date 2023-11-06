@@ -31,13 +31,8 @@ const hashColor = ref('');
 const rgbColor = ref('');
 const colorName = ref(readStorage(STORAGE_KEY_NAME));
 const btcAddr = ref(readStorage(STORAGE_KEY_BTC_ADDR));
-const btcAddrValid = ref(false);
+const btcAddrValid = ref(true);
 const btcErrorMsg = ref(false);
-
-const calcEditableColors = () => {
-  hashColor.value = `#${color.value}`;
-  rgbColor.value = convert.hex.rgb(color.value).join(' ');
-};
 
 const claim = () => {
   if (!btcAddrValid.value) return btcErrorMsg.value = true;
@@ -50,7 +45,10 @@ watch(hashColor, () => {
 watch(rgbColor, () => {
   color.value = convert.rgb.hex(rgbColor.value.trim().split(' '));
 });
-watch(color, calcEditableColors);
+watch(color, () => {
+  hashColor.value = `#${color.value}`;
+  rgbColor.value = convert.hex.rgb(color.value).join(' ');
+}, { immediate: true });
 
 watch([color, colorName, btcAddr], () => {
   writeStorage(STORAGE_KEY_COLOR, color.value);
@@ -62,10 +60,7 @@ watch(btcAddr, () => {
   const correct = btcAddr.value === '' || validate(btcAddr.value);
   btcAddrValid.value = correct;
   if (correct) btcErrorMsg.value = false;
-});
-
-
-calcEditableColors();
+}, { immediate: true });
 
 </script>
 
