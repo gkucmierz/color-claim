@@ -1,6 +1,10 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue';
 
+import ToggleButton from 'primevue/togglebutton';
+
+const grid = ref(true);
+
 let ctx;
 
 const canvas = ref(null);
@@ -16,15 +20,18 @@ const draw = () => {
       const a = y % 256;
       const b = x % 256;
       const c = (y >> 8) << 4 | (x >> 8);
-      data[i + 0] = a;
-      data[i + 1] = b;
-      data[i + 2] = c;
+      const r = grid.value ? (x + y) % 2 : 1;
+      data[i + 0] = a * r;
+      data[i + 1] = b * r;
+      data[i + 2] = c * r;
       data[i + 3] = 255;
     }
   }
   ctx.clearRect(0, 0, size, size);
   ctx.putImageData(imageData, 0, 0);
 };
+
+watch(grid, draw);
 
 onMounted(() => {
   ctx = canvas.value.getContext('2d');
@@ -35,6 +42,7 @@ onMounted(() => {
 
 <template>
   <canvas ref="canvas" :width="size" :height="size"></canvas>
+  <ToggleButton v-model="grid" onLabel="hide grid" offLabel="show grid" />
 </template>
 
 <style scoped>
