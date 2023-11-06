@@ -12,6 +12,7 @@ const randomColor = () => {
 
 const color = ref('');
 const hashColor = ref('');
+const rgbColor = ref('');
 const colorName = ref('');
 const btcAddr = ref('');
 
@@ -21,7 +22,13 @@ const getRGB = () => convert.hex.rgb(color.value).join(' ');
 watch(hashColor, () => {
   color.value = hashColor.value.trim().replace(/#/, '');
 });
-watch(color, () => hashColor.value = `#${color.value}`);
+watch(rgbColor, () => {
+  color.value = convert.rgb.hex(rgbColor.value.trim().split(' '));
+});
+watch(color, () => {
+  hashColor.value = `#${color.value}`;
+  rgbColor.value = convert.hex.rgb(color.value).join(' ');
+});
 
 color.value = randomColor();
 
@@ -38,7 +45,7 @@ color.value = randomColor();
       <form @submit="onSubmit" class="flex flex-column gap-2">
         <ColorCard :color="color" :name="colorName"></ColorCard>
         <div class="flex flex-row gap-2">
-          <InputText type="text" :value="getRGB()" v-tooltip="'RGB'" readonly/>
+          <InputText type="text" v-model="rgbColor" v-tooltip="'RGB'"/>
           <InputText type="text" v-model="hashColor" v-tooltip="'HEX'"/>
         </div>
         <InputText type="text" v-model="colorName" placeholder="Color Name" v-tooltip="'Color Name'" />
