@@ -30,8 +30,10 @@ const rgbColor = ref('');
 const colorName = ref(readStorage(STORAGE_KEY_NAME));
 const btcAddr = ref(readStorage(STORAGE_KEY_BTC_ADDR));
 
-const getHEX = () => `#${color.value}`;
-const getRGB = () => convert.hex.rgb(color.value).join(' ');
+const calcEditableColors = () => {
+  hashColor.value = `#${color.value}`;
+  rgbColor.value = convert.hex.rgb(color.value).join(' ');
+};
 
 watch(hashColor, () => {
   color.value = hashColor.value.trim().replace(/#/, '');
@@ -39,16 +41,15 @@ watch(hashColor, () => {
 watch(rgbColor, () => {
   color.value = convert.rgb.hex(rgbColor.value.trim().split(' '));
 });
-watch(color, () => {
-  hashColor.value = `#${color.value}`;
-  rgbColor.value = convert.hex.rgb(color.value).join(' ');
-});
+watch(color, calcEditableColors);
 
 watch([color, colorName, btcAddr], () => {
   writeStorage(STORAGE_KEY_COLOR, color.value);
   writeStorage(STORAGE_KEY_NAME, colorName.value);
   writeStorage(STORAGE_KEY_BTC_ADDR, btcAddr.value);
 });
+
+calcEditableColors();
 
 </script>
 
