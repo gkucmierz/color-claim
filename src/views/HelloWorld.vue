@@ -36,6 +36,7 @@ const btcErrorMsg = ref(false);
 
 const claim = () => {
   if (!btcAddrValid.value) return btcErrorMsg.value = true;
+  if (btcAddr.value === '') return btcErrorMsg.value = true;
   alert('processing tx');
 };
 
