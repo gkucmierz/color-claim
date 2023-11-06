@@ -6,15 +6,29 @@ import ColorPicker from 'primevue/colorpicker';
 
 import convert from 'color-convert';
 
+const STORAGE_KEY_COLOR = 'color';
+const STORAGE_KEY_NAME = 'name';
+const STORAGE_KEY_BTC_ADDR = 'btcAddr';
+
 const randomColor = () => {
   return convert.rgb.hex([256, 256, 256].map(n => Math.floor(Math.random()*n)));
 };
 
-const color = ref('');
+const readStorage = (key, def = '') => {
+  const item = localStorage.getItem(key);
+  if (item === null) return def;
+  return item;
+};
+
+const writeStorage = (key, value) => {
+  localStorage.setItem(key, value);
+};
+
+const color = ref(readStorage(STORAGE_KEY_COLOR, randomColor()));
 const hashColor = ref('');
 const rgbColor = ref('');
-const colorName = ref('');
-const btcAddr = ref('');
+const colorName = ref(readStorage(STORAGE_KEY_NAME));
+const btcAddr = ref(readStorage(STORAGE_KEY_BTC_ADDR));
 
 const getHEX = () => `#${color.value}`;
 const getRGB = () => convert.hex.rgb(color.value).join(' ');
@@ -30,7 +44,11 @@ watch(color, () => {
   rgbColor.value = convert.hex.rgb(color.value).join(' ');
 });
 
-color.value = randomColor();
+watch([color, colorName, btcAddr], () => {
+  writeStorage(STORAGE_KEY_COLOR, color.value);
+  writeStorage(STORAGE_KEY_NAME, colorName.value);
+  writeStorage(STORAGE_KEY_BTC_ADDR, btcAddr.value);
+});
 
 </script>
 
