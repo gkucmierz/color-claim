@@ -1,8 +1,10 @@
 <script setup>
 import { ref, watch } from 'vue';
 
-import ColorCard from '../components/ColorCard.vue';
 import ColorPicker from 'primevue/colorpicker';
+
+import ColorCard from '../components/ColorCard.vue';
+import validate from 'bitcoin-address-validation';
 
 import convert from 'color-convert';
 
@@ -29,10 +31,17 @@ const hashColor = ref('');
 const rgbColor = ref('');
 const colorName = ref(readStorage(STORAGE_KEY_NAME));
 const btcAddr = ref(readStorage(STORAGE_KEY_BTC_ADDR));
+const btcAddrValid = ref(false);
+const btcErrorMsg = ref(false);
 
 const calcEditableColors = () => {
   hashColor.value = `#${color.value}`;
   rgbColor.value = convert.hex.rgb(color.value).join(' ');
+};
+
+const claim = () => {
+  if (!btcAddrValid.value) return btcErrorMsg.value = true;
+  alert('processing tx');
 };
 
 watch(hashColor, () => {
@@ -48,6 +57,13 @@ watch([color, colorName, btcAddr], () => {
   writeStorage(STORAGE_KEY_NAME, colorName.value);
   writeStorage(STORAGE_KEY_BTC_ADDR, btcAddr.value);
 });
+
+watch(btcAddr, () => {
+  const correct = btcAddr.value === '' || validate(btcAddr.value);
+  btcAddrValid.value = correct;
+  if (correct) btcErrorMsg.value = false;
+});
+
 
 calcEditableColors();
 
@@ -68,8 +84,14 @@ calcEditableColors();
           <InputText type="text" v-model="hashColor" v-tooltip="'HEX'"/>
         </div>
         <InputText type="text" v-model="colorName" placeholder="Color Name" v-tooltip="'Color Name'" />
-        <InputText type="text" v-model="btcAddr" placeholder="BTC Address" v-tooltip="'Please use only Ordinals compatible wallets like UniSats, Xverse or Leather. Otherwise you might have a problem to access your inscription.'" label="Button" />
-        <Button label="Claim" />
+        
+        <div class="flex flex-column gap-2">
+          <InputText type="text" v-model="btcAddr" placeholder="BTC Address" :class="{'p-invalid': !btcAddrValid}"
+            v-tooltip="'Please use only Ordinals compatible wallets like UniSats, Xverse or Leather. Otherwise you might have a problem to access your inscription.'" />
+          <small class="error-msg" v-if="btcErrorMsg">Please provide valid bitcoin address.</small>
+        </div>
+
+        <Button label="Claim"  @click="claim()"/>
       </form>
     </div>
   </div>
@@ -77,5 +99,7 @@ calcEditableColors();
 </template>
 
 <style scoped>
-
+.error-msg {
+  color: #f00;
+}
 </style>
