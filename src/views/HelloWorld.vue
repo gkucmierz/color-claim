@@ -2,28 +2,15 @@
 import { ref, watch } from 'vue';
 
 import ColorPicker from 'primevue/colorpicker';
-
-import ColorCard from '../components/ColorCard.vue';
 import validate from 'bitcoin-address-validation';
-
 import convert from 'color-convert';
 
-const STORAGE_KEY_COLOR = 'color';
-const STORAGE_KEY_NAME = 'name';
-const STORAGE_KEY_BTC_ADDR = 'btcAddr';
+import ColorCard from '../components/ColorCard.vue';
+import { STORAGE_KEY_COLOR, STORAGE_KEY_NAME, STORAGE_KEY_BTC_ADDR, readStorage, writeStorage } from '../utils/storage';
+
 
 const randomColor = () => {
   return convert.rgb.hex([256, 256, 256].map(n => Math.floor(Math.random()*n)));
-};
-
-const readStorage = (key, def = '') => {
-  const item = localStorage.getItem(key);
-  if (item === null) return def;
-  return item;
-};
-
-const writeStorage = (key, value) => {
-  localStorage.setItem(key, value);
 };
 
 const color = ref(readStorage(STORAGE_KEY_COLOR, randomColor()));

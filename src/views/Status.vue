@@ -2,9 +2,7 @@
 import { ref } from 'vue';
 
 import { generate } from '../utils/certificate';
-
-const STORAGE_KEY_COLOR = 'color';
-const STORAGE_KEY_NAME = 'name';
+import { STORAGE_KEY_COLOR, STORAGE_KEY_NAME, STORAGE_KEY_BTC_ADDR, readStorage } from '../utils/storage';
 
 const readStorage = (key, def = '') => {
   const item = localStorage.getItem(key);
@@ -14,9 +12,10 @@ const readStorage = (key, def = '') => {
 
 const color = ref(readStorage(STORAGE_KEY_COLOR));
 const colorName = ref(readStorage(STORAGE_KEY_NAME));
+const btcAddr = ref(readStorage(STORAGE_KEY_BTC_ADDR));
 
 const downloadPDF = () => {
-  generate(colorName.value, color.value);
+  generate(colorName.value, color.value, btcAddr.value);
 };
 
 </script>

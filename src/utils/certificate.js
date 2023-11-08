@@ -2,7 +2,7 @@
 import { jsPDF } from 'jspdf';
 import convert from 'color-convert';
 
-export const generate = (colorName, color) => {
+export const generate = (colorName, color, btcAddr) => {
   const doc = new jsPDF();
   const [r, g, b] = convert.hex.rgb(color);
 
