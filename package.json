@@ -13,6 +13,7 @@
     "color-convert": "^2.0.1",
     "font-color-contrast": "^11.1.0",
     "js-base64": "^3.7.5",
+    "jspdf": "^2.5.1",
     "modern-normalize": "^2.0.0",
     "primeflex": "^3.3.1",
     "primeicons": "^6.0.1",
