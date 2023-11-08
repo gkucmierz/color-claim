@@ -1,8 +1,9 @@
 
 import { jsPDF } from 'jspdf';
 import convert from 'color-convert';
+import QRCode from 'qrcode';
 
-export const generate = (colorName, color, btcAddr) => {
+export const generate = async (colorName, color, btcAddr) => {
   const doc = new jsPDF();
   const [r, g, b] = convert.hex.rgb(color);
 
@@ -63,9 +64,6 @@ export const generate = (colorName, color, btcAddr) => {
   doc.text('Owners address', 30, 195, { align: 'left' });
   doc.line(30, 210, 180, 210);
 
-  // Define the size of the square and the radius of the corners
-  doc.roundedRect(30, 230, 40, 40, 3, 3, 'S');
-
   doc.text('date', 80, 275, { align: 'left' });
   doc.line(80, 270, 110, 270);
 
@@ -75,6 +73,17 @@ export const generate = (colorName, color, btcAddr) => {
   // placeholders:
   doc.setFontSize(14);
   doc.text(btcAddr, pageWidth / 2, 207, { align: 'center' });
+
+  // qr code:
+  const qrDataUrl = await QRCode.toDataURL('I am a pony!');
+  const qrRect = {
+    x: 30,
+    y: 230,
+    size: 40,
+    padding: -3,
+  };
+  doc.addImage(qrDataUrl, 'png', qrRect.x+qrRect.padding, qrRect.y+qrRect.padding, qrRect.size-qrRect.padding*2, qrRect.size-qrRect.padding*2);
+  doc.roundedRect(qrRect.x, qrRect.y, qrRect.size, qrRect.size, 3, 3, 'S');
 
   doc.save(`Color Certificate - ${colorName}.pdf`);
 };
