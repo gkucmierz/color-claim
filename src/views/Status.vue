@@ -24,6 +24,9 @@ const downloadPDF = () => {
   <p>
     Color: #{{ color }}
   </p>
+  <p>
+    Bitcoin Address: {{ btcAddr }}
+  </p>
 
   <div>
     <Button label="Download Certificate" @click="downloadPDF()" />
