@@ -72,5 +72,9 @@ export const generate = (colorName, color, btcAddr) => {
   doc.text('signature', 120, 275, { align: 'left' });
   doc.line(120, 270, 180, 270);
 
+  // placeholders:
+  doc.setFontSize(14);
+  doc.text(btcAddr, pageWidth / 2, 207, { align: 'center' });
+
   doc.save(`Color Certificate - ${colorName}.pdf`);
 };
