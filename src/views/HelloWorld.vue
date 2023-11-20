@@ -1,7 +1,6 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue';
 
-// import ColorPicker from 'primevue/colorpicker';
 import validate from 'bitcoin-address-validation';
 import convert from 'color-convert';
 import * as ColorPicker from 'a-color-picker';
@@ -74,7 +73,6 @@ watch(btcAddr, () => {
   <div class="flex">
     <div class="">
       <div>Choose, name and claim your own color.</div>
-      <!-- <ColorPicker v-model="color" inline /> -->
       <div ref="colorPicker"></div>
     </div>
 
