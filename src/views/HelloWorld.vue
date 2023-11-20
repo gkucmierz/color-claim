@@ -29,11 +29,12 @@ const claim = () => {
 };
 
 onMounted(() => {
+  const previewSize = 30 + 22;
   const pickerObj = ColorPicker.from(colorPicker.value, {
     showHSL: false,
     showRGB: false,
     showHEX: false,
-    hueBarSize: [150,11],
+    hueBarSize: [150 + previewSize, 11],
     slBarSize: [232, 150],
   });
   pickerObj.on('change', arg => {
@@ -99,5 +100,11 @@ watch(btcAddr, () => {
 <style scoped>
 .error-msg {
   color: #f00;
+}
+</style>
+
+<style>
+.a-color-picker-circle {
+  display: none;
 }
 </style>
