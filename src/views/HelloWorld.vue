@@ -29,13 +29,16 @@ const claim = () => {
 };
 
 onMounted(() => {
+  const pickerHeightDiff = 0;
+  const pickerWidthDiff = 0;
   const previewSize = 30 + 22;
   const pickerObj = ColorPicker.from(colorPicker.value, {
+    color: `#${color.value}`,
     showHSL: false,
     showRGB: false,
     showHEX: false,
-    hueBarSize: [150 + previewSize, 11],
-    slBarSize: [232, 150],
+    hueBarSize: [150 + pickerWidthDiff + previewSize, 11],
+    slBarSize: [232 + pickerWidthDiff, 150 + pickerHeightDiff],
   });
   pickerObj.on('change', arg => {
     color.value = arg.color.slice(1);
