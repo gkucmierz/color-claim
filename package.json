@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "a-color-picker": "^1.2.1",
     "bitcoin-address-validation": "^2.2.3",
     "color-convert": "^2.0.1",
     "font-color-contrast": "^11.1.0",

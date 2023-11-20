@@ -1,13 +1,13 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 
-import ColorPicker from 'primevue/colorpicker';
+// import ColorPicker from 'primevue/colorpicker';
 import validate from 'bitcoin-address-validation';
 import convert from 'color-convert';
+import * as ColorPicker from 'a-color-picker';
 
 import ColorCard from '../components/ColorCard.vue';
 import { STORAGE_KEY_COLOR, STORAGE_KEY_NAME, STORAGE_KEY_BTC_ADDR, readStorage, writeStorage } from '../utils/storage';
-
 
 const randomColor = () => {
   return convert.rgb.hex([256, 256, 256].map(n => Math.floor(Math.random()*n)));
@@ -20,12 +20,26 @@ const colorName = ref(readStorage(STORAGE_KEY_NAME));
 const btcAddr = ref(readStorage(STORAGE_KEY_BTC_ADDR));
 const btcAddrValid = ref(true);
 const btcErrorMsg = ref(false);
+const colorPicker = ref(null);
 
 const claim = () => {
   if (!btcAddrValid.value) return btcErrorMsg.value = true;
   if (btcAddr.value === '') return btcErrorMsg.value = true;
   alert('processing tx');
 };
+
+onMounted(() => {
+  const pickerObj = ColorPicker.from(colorPicker.value, {
+    showHSL: false,
+    showRGB: false,
+    showHEX: false,
+    hueBarSize: [150,11],
+    slBarSize: [232, 150],
+  });
+  pickerObj.on('change', arg => {
+    color.value = arg.color.slice(1);
+  });
+});
 
 watch(hashColor, () => {
   color.value = hashColor.value.trim().replace(/#/, '');
@@ -56,7 +70,8 @@ watch(btcAddr, () => {
   <div class="flex">
     <div class="">
       <div>Choose, name and claim your own color.</div>
-      <ColorPicker v-model="color" inline />
+      <!-- <ColorPicker v-model="color" inline /> -->
+      <div ref="colorPicker"></div>
     </div>
 
     <div class="flex justify-content-center flex-column flex-wrap">
