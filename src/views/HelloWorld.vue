@@ -109,6 +109,12 @@ watch(btcAddr, () => {
           <small class="error-msg" v-if="btcErrorMsg">Please provide valid bitcoin address.</small>
         </div>
 
+        <div class="flex flex-column gap-2">
+          <p>Color price: $5</p>
+          <p>Blockchain fees: $2.34 (17 sat / byte)</p>
+          <p>Overall cost: $7.34</p>
+        </div>
+
         <Button label="Claim"  @click="claim()"/>
       </form>
     </div>
