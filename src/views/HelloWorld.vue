@@ -1,5 +1,7 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 import validate from 'bitcoin-address-validation';
 import convert from 'color-convert';
@@ -29,7 +31,8 @@ let iroPicker;
 const claim = () => {
   if (!btcAddrValid.value) return btcErrorMsg.value = true;
   if (btcAddr.value === '') return btcErrorMsg.value = true;
-  alert('processing tx');
+  // alert('processing tx');
+  router.push({ path: '/payment' });
 };
 
 onMounted(() => {
