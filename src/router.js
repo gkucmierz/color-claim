@@ -7,6 +7,7 @@ import CanvasBoard from './views/CanvasBoard.vue';
 import CanvasBoard2d from './views/CanvasBoard2d.vue';
 import Status from './views/Status.vue';
 import Payment from './views/Payment.vue';
+import Faq from './views/Faq.vue';
 
 const routes = [
   { path: '/', component: HelloWorld },
@@ -16,6 +17,7 @@ const routes = [
   { path: '/canvas2d', component: CanvasBoard2d },
   { path: '/status', component: Status },
   { path: '/payment', component: Payment },
+  { path: '/faq', component: Faq },
 ];
 
 const router = createRouter({
