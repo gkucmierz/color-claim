@@ -16,3 +16,8 @@ body {
 ::selection {
   background: #e7f296;
 }
+
+.unselectable {
+  -webkit-user-select: none; /* Safari */
+  user-select: none;
+}

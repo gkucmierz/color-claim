@@ -81,7 +81,7 @@ showSvg(props.color, props.name);
 </script>
 
 <template>
-  <img :src="svgURI" />
+  <img :src="svgURI" class="unselectable" />
 </template>
 
 <style scoped>
