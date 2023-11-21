@@ -67,16 +67,13 @@ watch(btcAddr, () => {
 
 </script>
 
-<template>
-  <div class="flex">
-    <div>
-      <div>Choose, name and claim your own color.</div>
-      <div ref="colorPicker"></div>
-    </div>
-
+<template class="flex surface-ground">
+  <h1 class="flex justify-content-around text-2xl sm:text-4xl lg:text-5xl font-bold text-primary">Choose, name and claim your own color.</h1>
+  <div class="flex flex-wrap justify-content-evenly" style="max-width: 1500px">
+    <div class="flex justify-content-around p-2"><ColorCard :color="color" :name="colorName"></ColorCard></div>
     <div class="flex justify-content-center flex-column flex-wrap">
       <form @submit="onSubmit" class="flex flex-column gap-2">
-        <ColorCard :color="color" :name="colorName"></ColorCard>
+        <div class="flex flex-wrap justify-content-evenly" ref="colorPicker"></div>
         <div class="flex flex-row gap-2">
           <InputText type="text" v-model="rgbColor" v-tooltip="'RGB'"/>
           <InputText type="text" v-model="hashColor" v-tooltip="'HEX'"/>

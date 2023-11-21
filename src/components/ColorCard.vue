@@ -49,7 +49,7 @@ const MARGIN = 5;
 const props = defineProps({
   color: { type: String },
   name: { type: String },
-  size: { type: Number, default: 200 },
+  size: { type: Number, default: 320 },
 });
 const svgURI = ref(buildURI(props.color, props.name));
 const textSize = ref(50);
