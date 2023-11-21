@@ -9,3 +9,10 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
+::-moz-selection {
+  background: #e7f296;
+}
+::selection {
+  background: #e7f296;
+}
