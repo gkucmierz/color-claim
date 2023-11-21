@@ -2,3 +2,10 @@
 @import 'primevue/resources/themes/lara-light-teal/theme.css';
 /*@import 'primeicons/primeicons.css';*/
 @import 'primeflex/primeflex.css';
+
+
+body {
+  background-image: linear-gradient(to right top, #6c96d4, #3db5dd, #51cecf, #93e1b8, #d9eeac);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}

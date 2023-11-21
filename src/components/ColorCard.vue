@@ -34,7 +34,7 @@ const naturalSearch = (cond, retFirstTrue = true) => {
 const getSvgBody = (color, name, size) => {
   return `
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-      <rect width="100%" height="100%" fill="#${xss(color)}"/>
+      <rect width="100%" height="100%" fill="#${xss(color)}" rx="5"/>
 
       <text x="50%" y="50%" font-family="Arial" font-size="${Math.round(size)}%" fill="${fontColorContrast('#'+color)}" text-anchor="middle" dominant-baseline="middle">${xss(name)}</text>
     </svg>
@@ -49,7 +49,7 @@ const MARGIN = 5;
 const props = defineProps({
   color: { type: String },
   name: { type: String },
-  size: { type: Number, default: 200 },
+  size: { type: Number, default: 320 },
 });
 const svgURI = ref(buildURI(props.color, props.name));
 const textSize = ref(50);
@@ -88,5 +88,7 @@ showSvg(props.color, props.name);
 img {
   width: v-bind(px(props.size));
   height: v-bind(px(props.size));
+  border-radius: 20px;
+  border: 3px solid #fff;
 }
 </style>

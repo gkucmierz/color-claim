@@ -34,6 +34,8 @@ onMounted(() => {
   iroPicker = new iro.ColorPicker(colorPicker.value, {
     width: 320,
     color: `#${color.value}`,
+    borderWidth: 3,
+    borderColor: '#fff',
   });
   iroPicker.on('color:change', c => {
     color.value = c.hexString.slice(1);
@@ -68,15 +70,12 @@ watch(btcAddr, () => {
 </script>
 
 <template>
-  <div class="flex">
-    <div>
-      <div>Choose, name and claim your own color.</div>
-      <div ref="colorPicker"></div>
-    </div>
-
+  <h1 class="flex justify-content-around text-2xl md:text-4xl lg:text-5xl text-primary">Choose, name and claim your own color.</h1>
+  <div class="flex flex-wrap justify-content-evenly" style="max-width: 1500px">
+    <div class="flex justify-content-around p-2"><ColorCard :color="color" :name="colorName"></ColorCard></div>
     <div class="flex justify-content-center flex-column flex-wrap">
       <form @submit="onSubmit" class="flex flex-column gap-2">
-        <ColorCard :color="color" :name="colorName"></ColorCard>
+        <div class="flex flex-wrap justify-content-evenly" ref="colorPicker"></div>
         <div class="flex flex-row gap-2">
           <InputText type="text" v-model="rgbColor" v-tooltip="'RGB'"/>
           <InputText type="text" v-model="hashColor" v-tooltip="'HEX'"/>
@@ -105,5 +104,8 @@ watch(btcAddr, () => {
 <style scoped>
 .error-msg {
   color: #f00;
+}
+h1 {
+  text-shadow: 0 0 25px #fff, 0 0 25px #fff;
 }
 </style>
