@@ -103,4 +103,7 @@ watch(btcAddr, () => {
 .error-msg {
   color: #f00;
 }
+h1 {
+  text-shadow: 0 0 25px #fff, 0 0 25px #fff;
+}
 </style>
