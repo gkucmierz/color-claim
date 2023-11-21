@@ -32,7 +32,7 @@ const lnQr = ref('');
     <TabPanel>
         <template #header>
             <div class="flex align-items-center gap-2">
-                <Avatar image="/public/btc.png" shape="circle" />
+                <Avatar image="btc.png" shape="circle" />
                 <span class="font-bold white-space-nowrap">Bitcoin</span>
             </div>
         </template>
@@ -45,7 +45,7 @@ const lnQr = ref('');
     <TabPanel>
         <template #header>
             <div class="flex align-items-center gap-2">
-                <Avatar image="/public/ln.png" shape="circle" />
+                <Avatar image="ln.png" shape="circle" />
                 <span class="font-bold white-space-nowrap">Lightning Network</span>
             </div>
         </template>
