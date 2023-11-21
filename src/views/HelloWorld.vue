@@ -34,6 +34,8 @@ onMounted(() => {
   iroPicker = new iro.ColorPicker(colorPicker.value, {
     width: 320,
     color: `#${color.value}`,
+    borderWidth: 3,
+    borderColor: '#fff',
   });
   iroPicker.on('color:change', c => {
     color.value = c.hexString.slice(1);

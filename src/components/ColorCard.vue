@@ -88,6 +88,7 @@ showSvg(props.color, props.name);
 img {
   width: v-bind(px(props.size));
   height: v-bind(px(props.size));
-/*  border-radius: 50px;*/
+  border-radius: 20px;
+  border: 3px solid #fff;
 }
 </style>
