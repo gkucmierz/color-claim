@@ -67,8 +67,8 @@ watch(btcAddr, () => {
 
 </script>
 
-<template class="flex surface-ground">
-  <h1 class="flex justify-content-around text-2xl sm:text-4xl lg:text-5xl font-bold text-primary">Choose, name and claim your own color.</h1>
+<template>
+  <h1 class="flex justify-content-around text-2xl md:text-4xl lg:text-5xl text-primary">Choose, name and claim your own color.</h1>
   <div class="flex flex-wrap justify-content-evenly" style="max-width: 1500px">
     <div class="flex justify-content-around p-2"><ColorCard :color="color" :name="colorName"></ColorCard></div>
     <div class="flex justify-content-center flex-column flex-wrap">
