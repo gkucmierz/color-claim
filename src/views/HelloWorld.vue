@@ -5,7 +5,6 @@ const router = useRouter();
 
 import validate from 'bitcoin-address-validation';
 import convert from 'color-convert';
-// import * as ColorPicker from 'a-color-picker';
 import iro from '@jaames/iro';
 
 import ColorCard from '../components/ColorCard.vue';
@@ -22,39 +21,18 @@ const colorName = ref(readStorage(STORAGE_KEY_NAME));
 const btcAddr = ref(readStorage(STORAGE_KEY_BTC_ADDR));
 const btcAddrValid = ref(true);
 const btcErrorMsg = ref(false);
-// const colorPicker = ref(null);
-const colorPicker2 = ref(null);
-
+const colorPicker = ref(null);
 let iroPicker;
-// let pickerObj;
 
 const claim = () => {
   if (!btcAddrValid.value) return btcErrorMsg.value = true;
   if (btcAddr.value === '') return btcErrorMsg.value = true;
-  // alert('processing tx');
   router.push({ path: '/payment' });
 };
 
 onMounted(() => {
-  // const pickerHeightDiff = 0;
-  // const pickerWidthDiff = 0;
-  // const previewSize = 30 + 22;
-  // pickerObj = ColorPicker.from(colorPicker.value, {
-  //   color: `#${color.value}`,
-  //   showHSL: false,
-  //   showRGB: false,
-  //   showHEX: false,
-  //   hueBarSize: [150 + pickerWidthDiff + previewSize, 11],
-  //   slBarSize: [232 + pickerWidthDiff, 150 + pickerHeightDiff],
-  // });
-  // pickerObj.on('change', arg => {
-  //   color.value = arg.color.slice(1);
-  // });
-
-  iroPicker = new iro.ColorPicker(colorPicker2.value, {
-    // Set the size of the color picker
+  iroPicker = new iro.ColorPicker(colorPicker.value, {
     width: 320,
-    // Set the initial color to pure red
     color: `#${color.value}`,
   });
   iroPicker.on('color:change', c => {
@@ -91,10 +69,9 @@ watch(btcAddr, () => {
 
 <template>
   <div class="flex">
-    <div class="">
+    <div>
       <div>Choose, name and claim your own color.</div>
-      <!-- <div ref="colorPicker"></div> -->
-      <div ref="colorPicker2"></div>
+      <div ref="colorPicker"></div>
     </div>
 
     <div class="flex justify-content-center flex-column flex-wrap">
@@ -129,10 +106,4 @@ watch(btcAddr, () => {
 .error-msg {
   color: #f00;
 }
-</style>
-
-<style>
-/*.a-color-picker-circle {
-  display: none;
-}*/
 </style>
