@@ -70,35 +70,51 @@ watch(btcAddr, () => {
 </script>
 
 <template>
-  <h1 class="flex justify-content-around text-2xl md:text-4xl lg:text-5xl text-primary">Choose, name and claim your own color.</h1>
-  <div class="flex flex-wrap justify-content-evenly" style="max-width: 1500px">
-    <div class="flex justify-content-around p-2"><ColorCard :color="color" :name="colorName"></ColorCard></div>
-    <div class="flex justify-content-center flex-column flex-wrap">
-      <form @submit="onSubmit" class="flex flex-column gap-2">
-        <div class="flex flex-wrap justify-content-evenly" ref="colorPicker"></div>
-        <div class="flex flex-row gap-2">
-          <InputText type="text" v-model="rgbColor" v-tooltip="'RGB'"/>
-          <InputText type="text" v-model="hashColor" v-tooltip="'HEX'"/>
+  <h1 class="flex justify-content-around text-2xl md:text-4xl md:p-2 lg:text-6xl lg:p-2 text-primary text-center">Choose, name and claim your own color</h1>
+  <h3 class="hidden md:flex justify-content-around text-center">Inscribe it forever on the Bitcoin blockchain</h3>
+  <div class="flex flex-wrap justify-content-center" style="max-width: 100%">
+    <div class="flex p-2"><ColorCard :color="color" :name="colorName"></ColorCard></div>
+    <div class="flex p-2" ref="colorPicker"></div>
+  </div>
+
+  <div class="flex justify-content-evenly p-3">
+    <div class="container" >
+      <div>
+        <!-- Responsive Grid for Hex and RGB -->
+        <div class="flex flex-row flex-wrap ">
+          <div class="p-1 w-full md:w-6">
+            <InputText class="w-full" type="text" v-model="rgbColor" v-tooltip="'RGB'"/>
+          </div>
+          <div class="p-1 w-full md:w-6">
+            <InputText class="w-full" type="text" v-model="hashColor" v-tooltip="'HEX'"/>
+          </div>
         </div>
-        <InputText type="text" v-model="colorName" placeholder="Color Name" v-tooltip="'Color Name'" />
         
-        <div class="flex flex-column gap-2">
-          <InputText type="text" v-model="btcAddr" placeholder="BTC Address" :class="{'p-invalid': !btcAddrValid}"
-            v-tooltip="'Please use only Ordinals compatible wallets like UniSats, Xverse or Leather. Otherwise you might have a problem to access your inscription.'" />
-          <small class="error-msg" v-if="btcErrorMsg">Please provide valid bitcoin address.</small>
+        <!-- Name Input -->
+        <div class="flex p-1">
+          <InputText class="w-full" type="text" v-model="colorName" placeholder="Color Name" v-tooltip="'Color Name'"/>
         </div>
 
-        <div v-if="btcAddr!==''" class="flex flex-column gap-2">
+        <!-- Address Input -->
+        <div class="fle-wrap p-1">
+          <InputText class="w-full" type="text" v-model="btcAddr" placeholder="BTC Address" :class="{'p-invalid': !btcAddrValid}"
+                  v-tooltip="'Please use only Ordinals compatible wallets like UniSats, Xverse or Leather. Otherwise you might have a problem to access your inscription.'" />
+                <small class="error-msg" v-if="btcErrorMsg">Please provide a valid bitcoin address.</small>
+        </div>
+        <!-- Fees -->
+        <div class="flex-wrap p-1">
           <p>Color price: $5</p>
           <p>Blockchain fees: $2.34 (17 sat / byte)</p>
           <p>Overall cost: $7.34</p>
         </div>
 
-        <Button label="Claim"  @click="claim()"/>
-      </form>
+        <!-- Submit Button -->
+        <div class="flex p-1">
+          <Button class="w-full md:w-6" label="Claim" @click="claim()"/>
+        </div>
+      </div>
     </div>
   </div>
-
 </template>
 
 <style scoped>
