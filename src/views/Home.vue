@@ -74,7 +74,7 @@ watch(btcAddr, () => {
   <div class="flex flex-wrap justify-content-evenly" style="max-width: 1500px">
     <div class="flex justify-content-around p-2"><ColorCard :color="color" :name="colorName"></ColorCard></div>
     <div class="flex justify-content-center flex-column flex-wrap">
-      <form @submit="onSubmit" class="flex flex-column gap-2">
+      <form class="flex flex-column gap-2">
         <div class="flex flex-wrap justify-content-evenly" ref="colorPicker"></div>
         <div class="flex flex-row gap-2">
           <InputText type="text" v-model="rgbColor" v-tooltip="'RGB'"/>
