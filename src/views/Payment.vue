@@ -9,6 +9,9 @@ import QRCode from 'qrcode';
 
 import { STORAGE_KEY_COLOR, STORAGE_KEY_NAME, STORAGE_KEY_BTC_ADDR, readStorage } from '../utils/storage';
 
+// const API_URL = `https://api.colorclaim.org`;
+const API_URL = `http://localhost:8888`;
+
 const color = ref(readStorage(STORAGE_KEY_COLOR));
 const colorName = ref(readStorage(STORAGE_KEY_NAME));
 // const btcAddr = ref(readStorage(STORAGE_KEY_BTC_ADDR));
@@ -23,6 +26,30 @@ const lnQr = ref('');
   //&lightning=lnbc2680n1pj4ck4vpp5tqpnt2nzdmg7pgpzg2ezemtp8wwasamtg3fet94kzgy89dg485wqdq9fch5zcqzzsxqzjhsp5szwgmea0rv7ce3nmkcg8t3ttlawa7vzpg3jht7f3jh2gghyn6nzq9qyyssqlyeqrdxgscmd4kyltmn72pnmhqt4aewwj7amtxxktgpgf75yyp9szkcsm3f8weqqqz6p7mej9k6qwl3y33kk4hdlmenzqmp35cc4g5cqw64u6d');
   lnQr.value = await QRCode.toDataURL(invoice.value);
 })();
+
+const postData = async (url, data = {}) => {
+  const response = await fetch(url, {
+    method: 'POST',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    redirect: 'follow',
+    body: JSON.stringify(data),
+  });
+  return await response.json();
+}
+
+const createOrder = async () => {
+  const res = await postData([API_URL, 'create'].join('/'), {
+    color: color.value,
+    name: colorName.value,
+    btc_addr: btcAddr.value,
+  });
+  console.log(res);
+};
+
+createOrder();
 
 </script>
 
