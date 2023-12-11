@@ -6,9 +6,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Color Claim</title>
     <link rel="icon" type="image/x-icon" href="/public/logo.svg">
+    <style>
+      body, html {
+        height: 100%;
+        margin: 0;
+      }
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1; /* Ensure canvas stays in the background */
+      }
+      #app {
+        position: relative;
+        z-index: 1;
+      }
+    </style>
   </head>
   <body>
+    <canvas id="bannerCanvas"></canvas>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+    <script>
+  const canvas = document.getElementById('bannerCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // Set canvas size to full viewport width and height
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  function drawCircle(ctx, x, y, size, color, opacity) {
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, 2 * Math.PI);
+    ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${opacity})`;
+    ctx.fill();
+  }
+
+  // Define pastel colors with RGB
+  const colors = [
+    {r: 255, g: 179, b: 186},  // Pastel red
+    {r: 255, g: 223, b: 186},  // Pastel orange
+    {r: 255, g: 255, b: 186},  // Pastel yellow
+    {r: 186, g: 255, b: 201},  // Pastel green
+    {r: 186, g: 225, b: 255},  // Pastel blue
+    {r: 255, g: 186, b: 242}   // Pastel pink
+  ];
+
+  // Draw random circles with pastel colors and random opacity
+  for (let i = 0; i < 150; i++) {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height;
+    const size = Math.random() * (85 - 10) + 10; // Random size between 10 and 85
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const opacity = Math.random() * 0.5 + 0.5;  // Opacity between 0.5 (50%) and 1 (100%)
+    drawCircle(ctx, x, y, size, color, opacity);
+  }
+
+  // Add code to draw 'S' curves if needed
+    </script>
   </body>
 </html>
